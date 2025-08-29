@@ -15,6 +15,6 @@ jobs:
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }} 
-          JIRA_URL: ${{ secrets.JIRA_URL }}
+          JIRA_URL: ${{ vars.JIRA_URL }}
           PATTERN: '^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
           TITLE: ${{ github.event.pull_request.title }}
