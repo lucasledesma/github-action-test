@@ -75,16 +75,7 @@ def is_valid_pr_title(title, pattern):
     else:
         return (False, "Title does not match the required pattern.")
     
-
-def validate_required_env_vars(required_vars):
-    missing_vars = [var for var in required_vars if not os.environ.get(var)]
-    if missing_vars:
-        print(f'::error::Missing required environment variables: {", ".join(missing_vars)}')
-        sys.exit(1)
-
 def main():
-
-    validate_required_env_vars(['TITLE', 'INPUT_JIRA_URL', 'INPUT_JIRA_USERNAME', 'INPUT_JIRA_PASSWORD'])
 
     pattern = os.environ.get('PATTERN') or r'^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
     title = os.environ.get('TITLE')
