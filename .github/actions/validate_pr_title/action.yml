@@ -1,0 +1,43 @@
+name: 'PR Title Validator'
+description: 'A GitHub Action to validate pull request titles using Python.'
+author: 'Lucas Ledesma'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+inputs:
+  pattern:
+    description: 'Regex pattern to validate PR titles.'
+    required: true
+    default: '^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
+  jira_url:
+    description: 'The URL of the Jira instance.'
+    required: true
+    default: 'https://your-jira-instance.atlassian.net'
+  jira_username:
+    description: 'The username for Jira API access.'
+    required: true
+  jira_password:
+    description: 'The password or API token for Jira API access.'
+    required: true
+  title:
+    description: 'The title of the pull request.'
+    required: true
+outputs:
+  valid:
+    description: 'Whether the PR title is valid.'
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r .github/actions/validate_pr_title/requirements.txt
+      shell: bash
+    - name: Validate PR title
+      run: |
+        python .github/actions/validate_pr_title/validate_pr_title.py
+      shell: bash

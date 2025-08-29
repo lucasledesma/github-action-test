@@ -1,0 +1,22 @@
+# Example workflow for PR title validation using the custom action
+name: Validate PR Title
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Validate PR title
+        uses: ./.github/actions/validate_pr_title
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          jira_url: ${{ secrets.JIRA_URL }}
+          jira_username: ${{ secrets.JIRA_USERNAME }}
+          jira_password: ${{ secrets.JIRA_PASSWORD }}
+        env:
+          PATTERN: '^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
+          TITLE: ${{ github.event.pull_request.title }}
