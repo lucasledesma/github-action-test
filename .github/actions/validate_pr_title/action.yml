@@ -1,4 +1,4 @@
-name: 'PR Title Validator'
+name: 'PR Title Validator - BYOND'
 description: 'A GitHub Action to validate pull request titles using Python.'
 author: 'Lucas Ledesma'
 branding:
