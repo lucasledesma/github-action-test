@@ -14,19 +14,13 @@ load_dotenv('.env.local')
 
 
 def query_jira_issues(jql_query: str, 
-                     url: str = os.environ.get('INPUT_JIRA_URL'),
-                     username: str = os.environ.get('INPUT_JIRA_USERNAME'),
-                     password: str = os.environ.get('INPUT_JIRA_PASSWORD'),
+                     url: str = os.environ.get('JIRA_URL'),
+                     username: str = os.environ.get('JIRA_USERNAME'),
+                     password: str = os.environ.get('JIRA_PASSWORD'),
                      max_results: int = 1000,
                      verbose: bool = False) -> List[Dict[str, Any]]:
     
     try:
-
-        print('-' * 80)
-        print(f"JIRA_URL: {url}")
-        print(f"JIRA_USERNAME: {username}")
-        print(f"JIRA_PASSWORD: {password}")
-        print('-' * 80)
 
         session = requests.Session()
         jira = Jira(
