@@ -13,7 +13,6 @@ jobs:
       - name: Validate PR title
         uses: ./.github/actions/validate_pr_title
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           jira_url: ${{ secrets.JIRA_URL }}
           jira_username: ${{ secrets.JIRA_USERNAME }}
           jira_password: ${{ secrets.JIRA_PASSWORD }}

@@ -12,7 +12,6 @@ inputs:
   jira_url:
     description: 'The URL of the Jira instance.'
     required: true
-    default: 'https://your-jira-instance.atlassian.net'
   jira_username:
     description: 'The username for Jira API access.'
     required: true

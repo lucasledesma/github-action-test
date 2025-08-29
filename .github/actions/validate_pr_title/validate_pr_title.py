@@ -14,9 +14,9 @@ load_dotenv('.env.local')
 
 
 def query_jira_issues(jql_query: str, 
-                     url: str = os.environ.get('JIRA_URL'),
-                     username: str = os.environ.get('JIRA_USERNAME'),
-                     password: str = os.environ.get('JIRA_PASSWORD'),
+                     url: str = os.environ.get('INPUT_JIRA_URL'),
+                     username: str = os.environ.get('INPUT_JIRA_USERNAME'),
+                     password: str = os.environ.get('INPUT_JIRA_PASSWORD'),
                      max_results: int = 1000,
                      verbose: bool = False) -> List[Dict[str, Any]]:
     
@@ -75,22 +75,10 @@ def is_valid_pr_title(title, pattern):
     else:
         return (False, "Title does not match the required pattern.")
     
-
-def validate_required_env_vars(required_vars):
-    missing_vars = [var for var in required_vars if not os.environ.get(var)]
-    if missing_vars:
-        print(f'::error::Missing required environment variables: {", ".join(missing_vars)}')
-        sys.exit(1)
-
 def main():
-
-    validate_required_env_vars(['TITLE', 'INPUT_JIRA_URL', 'INPUT_JIRA_USERNAME', 'INPUT_JIRA_PASSWORD'])
 
     pattern = os.environ.get('PATTERN') or r'^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
     title = os.environ.get('TITLE')
-    jira_url = os.environ.get('INPUT_JIRA_URL')
-    jira_username = os.environ.get('INPUT_JIRA_USERNAME')
-    jira_password = os.environ.get('INPUT_JIRA_PASSWORD')
 
     (result,error) = is_valid_pr_title(title, pattern)
     if result:
