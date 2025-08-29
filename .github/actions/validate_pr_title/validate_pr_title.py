@@ -22,12 +22,6 @@ def query_jira_issues(jql_query: str,
     
     try:
 
-        print('-' * 80)
-        print(f"JIRA_URL: {url}")
-        print(f"JIRA_USERNAME: {username}")
-        print(f"JIRA_PASSWORD: {password}")
-        print('-' * 80)
-
         session = requests.Session()
         jira = Jira(
             url=url,
