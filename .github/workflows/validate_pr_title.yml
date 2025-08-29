@@ -12,10 +12,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Validate PR title
         uses: ./.github/actions/validate_pr_title
-        with:
-          jira_url: ${{ secrets.JIRA_URL }}
-          jira_username: ${{ secrets.JIRA_USERNAME }}
-          jira_password: ${{ secrets.JIRA_PASSWORD }}
         env:
+          JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+          JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }} 
+          JIRA_URL: ${{ secrets.JIRA_URL }}
           PATTERN: '^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
           TITLE: ${{ github.event.pull_request.title }}
