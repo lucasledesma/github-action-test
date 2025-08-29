@@ -14,9 +14,9 @@ load_dotenv('.env.local')
 
 
 def query_jira_issues(jql_query: str, 
-                     url: str = os.environ.get('JIRA_URL'),
-                     username: str = os.environ.get('JIRA_USERNAME'),
-                     password: str = os.environ.get('JIRA_PASSWORD'),
+                     url: str = os.environ.get('INPUT_JIRA_URL'),
+                     username: str = os.environ.get('INPUT_JIRA_USERNAME'),
+                     password: str = os.environ.get('INPUT_JIRA_PASSWORD'),
                      max_results: int = 1000,
                      verbose: bool = False) -> List[Dict[str, Any]]:
     
@@ -79,9 +79,6 @@ def main():
 
     pattern = os.environ.get('PATTERN') or r'^(feat|fix|docs|style|refactor|perf|test|chore)\([A-Z]+-\d+\): .+'
     title = os.environ.get('TITLE')
-    jira_url = os.environ.get('INPUT_JIRA_URL')
-    jira_username = os.environ.get('INPUT_JIRA_USERNAME')
-    jira_password = os.environ.get('INPUT_JIRA_PASSWORD')
 
     (result,error) = is_valid_pr_title(title, pattern)
     if result:
